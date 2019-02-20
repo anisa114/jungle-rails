@@ -46,8 +46,20 @@ main section.categories-show {
         right: 0;
         padding: 10px;
         background-color: #eee;
-        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
         border-bottom-left-radius: 20px;
+        font-size: 0.8em;
+      }
+
+      aside.sold_out {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px;
+        color: white;
+        background-color: #f44259;
+        border-top-right-radius: 1px;
+        border-bottom-right-radius: 20px;
         font-size: 0.8em;
       }
 
