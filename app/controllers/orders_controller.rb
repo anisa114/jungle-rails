@@ -12,10 +12,25 @@ class OrdersController < ApplicationController
 
     if order.valid?
       empty_cart!
+      UserMailer.confirmation_email(order).deliver_now
       redirect_to order, notice: 'Your Order has been placed.'
     else
       redirect_to cart_path, flash: { error: order.errors.full_messages.first }
     end
+
+
+  #   respond_to do |format|
+  #     if order.save
+         
+  #        format.html { redirect_to(order, notice: 'Order was successfully created.') }
+  #        format.json { render json: order, status: :created, location: order }
+  #     else
+  #        format.html { render action: '/' }
+  #        format.json { render json: order.errors, status: :unprocessable_entity }
+  #     end
+      
+  #  end
+    
 
   rescue Stripe::CardError => e
     redirect_to cart_path, flash: { error: e.message }
@@ -54,7 +69,8 @@ class OrdersController < ApplicationController
         total_price: product.price * quantity
       )
     end
-    order.save!
+    if order.save!
+    end
     order
   end
 
