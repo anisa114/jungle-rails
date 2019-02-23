@@ -26,6 +26,26 @@
       </div>
     </div>
 
-  </article>
 
+  <div class ="container">
+  <% @reviews.reverse_each do |review| %>
+    <h3> <%= review.description %> </h3>
+    <h3> <%= review.rating %> </h3>
+    <%= button_to "delete", product_review_path(product_id: @product.id, id: review.id), :method => :delete %>
+    <% end %>
+  </article>
+  <% if current_user %>
+  <%= form_for([@product, @review]) do |f| %>
+    <%= f.label :Description %>
+    <%= f.text_area :description %><br />
+    <%= f.label :rating  %>:
+    <%= f.select :rating, options_for_select(1..5)%><br />
+    <%= f.submit %>
+  
+  <% end %>
+  <% end %>
+  
+</div>
 </section>
+
+
